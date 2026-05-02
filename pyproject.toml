@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ai-character-sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "A unified SDK for creating AI characters with memory, personality, and decision-making capabilities"
 readme = "README.md"
 authors = [
