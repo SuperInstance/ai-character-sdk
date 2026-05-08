@@ -1,56 +1,51 @@
-# ai-character-sdk
+# AI Character SDK
 
-A unified Python SDK for creating AI characters with memory, personality, and decision-making capabilities. Combines an escalation engine, hierarchical memory, and outcome learning into a simple API.
+**Characters with memory, personality, and decisions. One Python SDK.**
 
-## Brand Line
+An AI character should remember what happened last conversation, maintain a consistent personality across sessions, and learn from outcomes — which responses worked, which didn't, and how to handle edge cases. This SDK provides all three in a unified API.
 
-> Characters that remember, learn, and decide — built for fleet members.
+---
 
-## Installation
+## What's Inside
 
-```bash
-pip install cocapn-ai-character-sdk
-```
+**Escalation engine** — when the character doesn't know something, it doesn't hallucinate. It escalates to a defined handler: a human, a more capable model, or a retrieval layer.
+
+**Hierarchical memory** — short-term (within conversation), medium-term (across sessions), long-term (permanent knowledge). Characters remember what matters and forget what doesn't.
+
+**Outcome learning** — characters track which of their responses led to successful outcomes and adjust their behavior over time. The more conversations, the better they get.
+
+---
 
 ## Quick Start
 
 ```python
 from ai_character_sdk import Character
 
-# Create a character
-hero = Character(
-    name="Finn the Brave",
-    character_class="paladin",
-    personality={"bravery": 0.9, "kindness": 0.8}
+# Create a character with memory and escalation
+char = Character(
+    name="harbor-master",
+    personality="practical, direct, safety-conscious",
+    memory_config={"short_term": 50, "long_term": "sqlite:///memory.db"},
+    escalation_handler="http://fleet-harbor.internal/escalate"
 )
 
-# Use the character
-response = hero.think("I see a goblin approaching")
-print(response.content)
+response = char.respond("What's the draft of the fleet's largest vessel?")
 
-# Remember experiences
-hero.remember("The goblin was actually friendly", importance=7.0)
-
-# Learn from outcomes
-hero.learn(outcome="Made a new ally", success=True, reward=10.0)
+# Character learns: was this response correct?
+char.record_outcome(response.id, successful=True)
 ```
 
-## Features
+---
 
-- **Unified Character API** — Simple, intuitive interface for character creation
-- **6-Tier Memory System** — Hierarchical memory inspired by cognitive neuroscience
-- **Intelligent Decision Routing** — Cost-effective escalation engine (BOT/BRAIN/HUMAN tiers)
-- **Dynamic Personality** — Trait-based behavior system
-- **Outcome Learning** — Reinforcement learning from experience
-- **Persistence** — Save and load character state
-- **Character Presets** — Pre-built archetypes to get started quickly
+## How It Fits
 
-## Fleet Context
-
-Part of the Cocapn fleet. Related repos:
-- [bordercollie](https://github.com/SuperInstance/bordercollie) — Fleet task herding and orchestration
-- [agentic-compiler](https://github.com/SuperInstance/agentic-compiler) — Markdown-to-runtime compilation
-- [cudaclaw](https://github.com/SuperInstance/cudaclaw) — GPU-accelerated agent orchestration
+- **[ai-character-sdk](https://github.com/SuperInstance/ai-character-sdk)** — character infrastructure (this)
+- **[actualization-harbor](https://github.com/SuperInstance/actualization-harbor)** — training harbor where characters level up
+- **[babel-vessel](https://github.com/SuperInstance/babel-vessel)** — multilingual character deployment
+- **[cocapn](https://github.com/SuperInstance/cocapn)** — fleet coordination for character agents
 
 ---
-🦐 Cocapn fleet — lighthouse keeper architecture
+
+## License
+
+MIT
