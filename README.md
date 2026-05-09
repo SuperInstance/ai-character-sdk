@@ -1,5 +1,15 @@
 # AI Character SDK
 
+
+## Meta
+
+**Domain:** ai-agents
+**Depends on:** —
+**Depended by:** —
+**Implements:** Unified AI Character SDK combining escalation engine, hierarchical memory, and l...
+**Related:** —
+
+
 **Characters with memory, personality, and decisions. One Python SDK.**
 
 An AI character should remember what happened last conversation, maintain a consistent personality across sessions, and learn from outcomes — which responses worked, which didn't, and how to handle edge cases. This SDK provides all three in a unified API.
